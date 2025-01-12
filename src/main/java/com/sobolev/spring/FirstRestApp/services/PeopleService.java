@@ -2,6 +2,7 @@ package com.sobolev.spring.FirstRestApp.services;
 
 import com.sobolev.spring.FirstRestApp.models.Person;
 import com.sobolev.spring.FirstRestApp.repositories.PeopleRepository;
+import com.sobolev.spring.FirstRestApp.util.PersonNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,6 @@ public class PeopleService {
 
     public Person findOne(int id) {
         Optional<Person> person = peopleRepository.findById(id);
-        return person.orElse(null);
+        return person.orElseThrow(PersonNotFoundException::new);
     }
 }
